@@ -1,25 +1,53 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+export default  new Router({
+  mode:'history',
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+  {
+      path:'/home',
+      redirect:'/home/shouye',
+      component:()=>import('./views/home/home.vue'),
+      children:[
+        {
+          path:'/home/shouye',
+          name:'/home/shouye',
+          component:()=>import('./views/home/shouye/shouye.vue')
+        },
+        {
+          path:'/home/ranking',
+          name:'/home/ranking',
+          component:()=>import('./views/home/ranking/ranking.vue')
+        },
+        {
+          path:'/home/classify',
+          name:'/home/classify',
+          component:()=>import('./views/home/classify/classify.vue')
+        },
+        {
+          path:'/home/book',
+          name:'/home/book',
+          component:()=>import('./views/home/book/book.vue')
+        }
+      ]
+  },
+  {
+    path:'/login',
+    name:'/login',
+    component:()=> import('./views/login/login.vue')
+  },
+  {
+    path:'/details',
+    name:'/details',
+    component:()=>import('./views/details/details.vue')
+  },
+  {
+    path:'*',
+    redirect:'/home'
+  }
+
   ]
 })
