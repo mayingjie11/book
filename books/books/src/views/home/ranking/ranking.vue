@@ -5,7 +5,7 @@
             <div :class="'Ranking-nav-list ' + (curIndex === index ? 'active' : '')" v-for='(item,index) in navList' :key='index' @click="clickCurIndex(index)">{{item}}</div>
         </div> 
         <div class="content">
-            <Item></Item>
+            <Item v-for="(item,index) in newList" :key="index" :item="item"></Item>
         </div>
         
     </div>
@@ -13,22 +13,30 @@
 
 <script>
     import Item from '@/components/item'
+    import "@/mock/index.js"
     export default {
         data(){
             return {
                 navList:['热门','新书','免费','完本'],
-                curIndex:0
+                curIndex:0,
+                newList:[],
+                list:{}
             }
         },
         components:{
             Item
         },
         created(){
-
+            this.$http.get('/api/data').then(res => {
+                this.list =res.data.list
+                this.newList = res.data.list.ranklist0;
+            })
         },
         methods:{
             clickCurIndex(index){
                 this.curIndex=index
+                this.newList = this.list["ranklist"+index]
+               
             }
         }
     }
