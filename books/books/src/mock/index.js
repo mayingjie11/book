@@ -8,3 +8,6 @@ Mock.mock('/api/banner',{
 Mock.mock('/api/data',{
     'list':data
 })
+Mock.mock('/api/dataa',{
+    'list':data
+})

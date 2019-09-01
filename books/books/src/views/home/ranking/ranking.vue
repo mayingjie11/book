@@ -5,7 +5,7 @@
             <div :class="'Ranking-nav-list ' + (curIndex === index ? 'active' : '')" v-for='(item,index) in navList' :key='index' @click="clickCurIndex(index)">{{item}}</div>
         </div> 
         <div class="content">
-            <Item v-for="(item,index) in newList" :key="index" :item="item"></Item>
+            <Item v-for="(item,index) in newList" :key="index" :item="item" ></Item>
         </div>
         
     </div>

@@ -1,21 +1,27 @@
 <template>
-    <div class="item">
-        <div class="item-left">
-            <img :src="item.coverUrl"/> 
+        <div class="item" @click="clickId(item.bookId)">
+            <div class="item-left">
+                    <img :src="item.coverUrl"/> 
+            </div>
+            <div class="item-right">
+                    <h3>{{item.categoryName}}</h3>
+                    <p>{{item.bookName}}</p>
+                    <p>{{item.authorName}}</p>
+                    <p>{{item.description}}</p>
+            </div>
         </div>
-        <div class="item-right">
-            <h3>{{item.categoryName}}</h3>
-            <p>{{item.bookName}}</p>
-            <p>{{item.authorName}}</p>
-            <p>{{item.description}}</p>
-        </div>
-    </div>
 </template>
 
 <script>
     export default {
         props:{
             item:Object
+        },
+        methods:{
+            clickId(id){
+                console.log(id)
+                this.$router.push(`/details?id=${id}`)
+            }
         }
     }
 </script>
